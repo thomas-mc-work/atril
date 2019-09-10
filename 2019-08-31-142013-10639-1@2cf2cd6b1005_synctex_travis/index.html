@@ -1,0 +1,549 @@
+<html>
+<head>
+<title>rootdir - scan-build results</title>
+<link type="text/css" rel="stylesheet" href="scanview.css"/>
+<script src="sorttable.js"></script>
+<script language='javascript' type="text/javascript">
+function SetDisplay(RowClass, DisplayVal)
+{
+  var Rows = document.getElementsByTagName("tr");
+  for ( var i = 0 ; i < Rows.length; ++i ) {
+    if (Rows[i].className == RowClass) {
+      Rows[i].style.display = DisplayVal;
+    }
+  }
+}
+
+function CopyCheckedStateToCheckButtons(SummaryCheckButton) {
+  var Inputs = document.getElementsByTagName("input");
+  for ( var i = 0 ; i < Inputs.length; ++i ) {
+    if (Inputs[i].type == "checkbox") {
+      if(Inputs[i] != SummaryCheckButton) {
+        Inputs[i].checked = SummaryCheckButton.checked;
+        Inputs[i].onclick();
+      }
+    }
+  }
+}
+
+function returnObjById( id ) {
+    if (document.getElementById)
+        var returnVar = document.getElementById(id);
+    else if (document.all)
+        var returnVar = document.all[id];
+    else if (document.layers)
+        var returnVar = document.layers[id];
+    return returnVar;
+}
+
+var NumUnchecked = 0;
+
+function ToggleDisplay(CheckButton, ClassName) {
+  if (CheckButton.checked) {
+    SetDisplay(ClassName, "");
+    if (--NumUnchecked == 0) {
+      returnObjById("AllBugsCheck").checked = true;
+    }
+  }
+  else {
+    SetDisplay(ClassName, "none");
+    NumUnchecked++;
+    returnObjById("AllBugsCheck").checked = false;
+  }
+}
+</script>
+<!-- SUMMARYENDHEAD -->
+</head>
+<body>
+<h1>rootdir - scan-build results</h1>
+
+<table>
+<tr><th>User:</th><td>root@63515e80a205</td></tr>
+<tr><th>Working Directory:</th><td>/rootdir</td></tr>
+<tr><th>Command Line:</th><td>make -j 2</td></tr>
+<tr><th>Clang Version:</th><td>clang version 8.0.0 (Fedora 8.0.0-1.fc30)
+</td></tr>
+<tr><th>Date:</th><td>Sat Aug 31 14:20:13 2019</td></tr>
+</table>
+<h2>Bug Summary</h2><table>
+<thead><tr><td>Bug Type</td><td>Quantity</td><td class="sorttable_nosort">Display?</td></tr></thead>
+<tr style="font-weight:bold"><td class="SUMM_DESC">All Bugs</td><td class="Q">147</td><td><center><input type="checkbox" id="AllBugsCheck" onClick="CopyCheckedStateToCheckButtons(this);" checked/></center></td></tr>
+<tr><th>Dead code</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Unreachable code</td><td class="Q">11</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_dead_code_unreachable_code');" checked/></center></td></tr>
+<tr><th>Dead store</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Dead assignment</td><td class="Q">21</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_dead_store_dead_assignment');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dead increment</td><td class="Q">4</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_dead_store_dead_increment');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dead initialization</td><td class="Q">42</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_dead_store_dead_initialization');" checked/></center></td></tr>
+<tr><th>Logic error</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Cast from non-struct type to struct type</td><td class="Q">6</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_cast_from_non-struct_type_to_struct_type');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Cast region with wrong size</td><td class="Q">2</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_cast_region_with_wrong_size');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dereference of null pointer</td><td class="Q">13</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_dereference_of_null_pointer');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Out-of-bound access</td><td class="Q">4</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_out-of-bound_access');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Potential unintended use of sizeof() on pointer type</td><td class="Q">2</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_potential_unintended_use_of_sizeof_on_pointer_type');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Result of operation is garbage or undefined</td><td class="Q">8</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_result_of_operation_is_garbage_or_undefined');" checked/></center></td></tr>
+<tr><th>Memory error</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Memory leak</td><td class="Q">10</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_memory_error_memory_leak');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Use-after-free</td><td class="Q">4</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_memory_error_use-after-free');" checked/></center></td></tr>
+<tr><th>Security</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td class="Q">14</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Potential insecure memory buffer bounds restriction in call 'strcpy'</td><td class="Q">6</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcpy_');" checked/></center></td></tr>
+</table>
+<h2>Reports</h2>
+
+<table class="sortable" style="table-layout:automatic">
+<thead><tr>
+  <td>Bug Group</td>
+  <td class="sorttable_sorted">Bug Type<span id="sorttable_sortfwdind">&nbsp;&#x25BE;</span></td>
+  <td>File</td>
+  <td>Function/Method</td>
+  <td class="Q">Line</td>
+  <td class="Q">Path Length</td>
+  <td class="sorttable_nosort"></td>
+  <!-- REPORTBUGCOL -->
+</tr></thead>
+<tbody>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>cut-n-paste/smclient/eggsmclient-xsmp.c</td><td class="DESC">array_prop</td><td class="Q">1155</td><td class="Q">1</td><td><a href="report-296052.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-296052.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>shell/ev-bookmarks.c</td><td class="DESC">ev_bookmarks_constructed</td><td class="Q">131</td><td class="Q">1</td><td><a href="report-c775c0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c775c0.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>cut-n-paste/smclient/eggsmclient-xsmp.c</td><td class="DESC">ptrarray_prop</td><td class="Q">1188</td><td class="Q">1</td><td><a href="report-9cb1ed.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9cb1ed.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>cut-n-paste/smclient/eggsmclient-xsmp.c</td><td class="DESC">ptrarray_prop</td><td class="Q">1188</td><td class="Q">1</td><td><a href="report-58b63f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-58b63f.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>shell/ev-bookmarks.c</td><td class="DESC">ev_bookmarks_save</td><td class="Q">204</td><td class="Q">1</td><td><a href="report-d164b8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d164b8.html" -->
+</tr>
+<tr class="bt_logic_error_cast_from_non-struct_type_to_struct_type"><td class="DESC">Logic error</td><td class="DESC">Cast from non-struct type to struct type</td><td>cut-n-paste/smclient/eggsmclient-xsmp.c</td><td class="DESC">array_prop</td><td class="Q">1155</td><td class="Q">1</td><td><a href="report-7de7df.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7de7df.html" -->
+</tr>
+<tr class="bt_logic_error_cast_region_with_wrong_size"><td class="DESC">Logic error</td><td class="DESC">Cast region with wrong size</td><td>backend/epub/epub-document.c</td><td class="DESC">setup_document_content_list</td><td class="Q">1024</td><td class="Q">18</td><td><a href="report-e9869e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e9869e.html" -->
+</tr>
+<tr class="bt_logic_error_cast_region_with_wrong_size"><td class="DESC">Logic error</td><td class="DESC">Cast region with wrong size</td><td>backend/epub/epub-document.c</td><td class="DESC">setup_document_content_list</td><td class="Q">1024</td><td class="Q">18</td><td><a href="report-b94758.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b94758.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/zoom-control/ephy-zoom-control.c</td><td class="DESC">ephy_zoom_control_class_init</td><td class="Q">277</td><td class="Q">1</td><td><a href="report-6fc03b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6fc03b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>backend/djvu/djvu-links.c</td><td class="DESC">get_djvu_hyperlink_mapping</td><td class="Q">329</td><td class="Q">1</td><td><a href="report-68a50d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-68a50d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/toolbar-editor/egg-toolbar-editor.c</td><td class="DESC">update_editor_sheet</td><td class="Q">621</td><td class="Q">1</td><td><a href="report-a1b555.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a1b555.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>backend/djvu/djvu-links.c</td><td class="DESC">get_djvu_hyperlink_mapping</td><td class="Q">329</td><td class="Q">1</td><td><a href="report-11ac30.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-11ac30.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5369</td><td class="Q">1</td><td><a href="report-771530.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-771530.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5177</td><td class="Q">1</td><td><a href="report-f5f1c6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f5f1c6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/toolbar-editor/egg-toolbar-editor.c</td><td class="DESC">update_editor_sheet</td><td class="Q">621</td><td class="Q">1</td><td><a href="report-8503af.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8503af.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5077</td><td class="Q">1</td><td><a href="report-41aecb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-41aecb.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>backend/epub/minizip/unzip.c</td><td class="DESC">unzOpenCurrentFile3</td><td class="Q">1538</td><td class="Q">1</td><td><a href="report-fc2c01.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fc2c01.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/zoom-control/ephy-zoom-control.c</td><td class="DESC">ephy_zoom_control_class_init</td><td class="Q">277</td><td class="Q">1</td><td><a href="report-5a1f4c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5a1f4c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5077</td><td class="Q">1</td><td><a href="report-8a8833.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8a8833.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5214</td><td class="Q">1</td><td><a href="report-35cdfc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-35cdfc.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5177</td><td class="Q">1</td><td><a href="report-c2b086.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c2b086.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>backend/pdf/ev-poppler.cc</td><td class="DESC">pdf_document_annotations_add_annotation</td><td class="Q">3009</td><td class="Q">1</td><td><a href="report-2416b7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2416b7.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5214</td><td class="Q">1</td><td><a href="report-efabfb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-efabfb.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>shell/ev-window.c</td><td class="DESC">setup_document_from_metadata</td><td class="Q">1405</td><td class="Q">1</td><td><a href="report-3eaea8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3eaea8.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>backend/epub/minizip/unzip.c</td><td class="DESC">unzOpenCurrentFile3</td><td class="Q">1538</td><td class="Q">1</td><td><a href="report-6a2fc5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6a2fc5.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/toolbar-editor/egg-toolbars-model.c</td><td class="DESC">egg_toolbars_model_to_xml</td><td class="Q">101</td><td class="Q">1</td><td><a href="report-fa80fa.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fa80fa.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5369</td><td class="Q">1</td><td><a href="report-7fc2e6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7fc2e6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>backend/pdf/ev-poppler.cc</td><td class="DESC">pdf_document_annotations_add_annotation</td><td class="Q">3009</td><td class="Q">1</td><td><a href="report-778b4a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-778b4a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>cut-n-paste/toolbar-editor/egg-toolbars-model.c</td><td class="DESC">egg_toolbars_model_to_xml</td><td class="Q">101</td><td class="Q">1</td><td><a href="report-1fad3b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1fad3b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>backend/epub/minizip/unzip.c</td><td class="DESC">unz64local_GetCurrentFileInfoInternal</td><td class="Q">1102</td><td class="Q">1</td><td><a href="report-152a98.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-152a98.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>backend/epub/minizip/unzip.c</td><td class="DESC">unz64local_GetCurrentFileInfoInternal</td><td class="Q">1105</td><td class="Q">1</td><td><a href="report-02a91c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-02a91c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>backend/epub/minizip/unzip.c</td><td class="DESC">unz64local_GetCurrentFileInfoInternal</td><td class="Q">1102</td><td class="Q">1</td><td><a href="report-1febab.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1febab.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>backend/epub/minizip/unzip.c</td><td class="DESC">unz64local_GetCurrentFileInfoInternal</td><td class="Q">1105</td><td class="Q">1</td><td><a href="report-0688cf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0688cf.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_new_input</td><td class="Q">4210</td><td class="Q">1</td><td><a href="report-d083f6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d083f6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_decode_int</td><td class="Q">4042</td><td class="Q">1</td><td><a href="report-87090a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-87090a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5046</td><td class="Q">1</td><td><a href="report-85ecf6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-85ecf6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_post_process</td><td class="Q">5857</td><td class="Q">1</td><td><a href="report-b1b6ed.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b1b6ed.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_preamble</td><td class="Q">4289</td><td class="Q">1</td><td><a href="report-f0fadd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f0fadd.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_closest_deep_child_v2</td><td class="Q">8314</td><td class="Q">1</td><td><a href="report-ee0a1e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ee0a1e.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">epub_document_get_info</td><td class="Q">1333</td><td class="Q">1</td><td><a href="report-8b260d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8b260d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">epub_document_get_info</td><td class="Q">1333</td><td class="Q">1</td><td><a href="report-73cb2a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-73cb2a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5046</td><td class="Q">1</td><td><a href="report-00bfa8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-00bfa8.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_float_and_dimension</td><td class="Q">4371</td><td class="Q">1</td><td><a href="report-a3ab10.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a3ab10.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_preamble</td><td class="Q">4288</td><td class="Q">1</td><td><a href="report-cfcde0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cfcde0.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_decode_int</td><td class="Q">4042</td><td class="Q">1</td><td><a href="report-400f42.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-400f42.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_match_string</td><td class="Q">3928</td><td class="Q">1</td><td><a href="report-d26ee6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d26ee6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_match_string</td><td class="Q">3928</td><td class="Q">1</td><td><a href="report-b00ae9.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b00ae9.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_decode_int_opt</td><td class="Q">4073</td><td class="Q">1</td><td><a href="report-1eade1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1eade1.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_eq_closest_child_v2</td><td class="Q">8348</td><td class="Q">1</td><td><a href="report-1c8d33.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1c8d33.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_decode_int_opt</td><td class="Q">4073</td><td class="Q">1</td><td><a href="report-4653e2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4653e2.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">add_night_sheet</td><td class="Q">1511</td><td class="Q">1</td><td><a href="report-48a07f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-48a07f.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_float_and_dimension</td><td class="Q">4371</td><td class="Q">1</td><td><a href="report-8409a3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8409a3.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_eq_closest_child_v2</td><td class="Q">8348</td><td class="Q">1</td><td><a href="report-035b93.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-035b93.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5066</td><td class="Q">1</td><td><a href="report-c5c077.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c5c077.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_eq_get_closest_children_in_hbox_v2</td><td class="Q">8114</td><td class="Q">1</td><td><a href="report-8c2371.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8c2371.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_sfi</td><td class="Q">5066</td><td class="Q">1</td><td><a href="report-ebad24.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ebad24.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_post_scriptum</td><td class="Q">4451</td><td class="Q">1</td><td><a href="report-94277d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-94277d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_post_scriptum</td><td class="Q">4451</td><td class="Q">1</td><td><a href="report-e846b3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e846b3.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">epub_document_add_mathJax</td><td class="Q">1660</td><td class="Q">1</td><td><a href="report-78b43d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-78b43d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">add_night_sheet</td><td class="Q">1511</td><td class="Q">1</td><td><a href="report-20245a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-20245a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">add_night_sheet</td><td class="Q">1510</td><td class="Q">1</td><td><a href="report-e0467d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e0467d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_closest_deep_child_v2</td><td class="Q">8314</td><td class="Q">1</td><td><a href="report-f21074.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f21074.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_postamble</td><td class="Q">4542</td><td class="Q">1</td><td><a href="report-c5aa0a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c5aa0a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_decode_string</td><td class="Q">4145</td><td class="Q">1</td><td><a href="report-6667f8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6667f8.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_parse_new_input</td><td class="Q">4210</td><td class="Q">1</td><td><a href="report-31e3bc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-31e3bc.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_eq_get_closest_children_in_hbox_v2</td><td class="Q">8114</td><td class="Q">1</td><td><a href="report-7eb3ba.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7eb3ba.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_preamble</td><td class="Q">4289</td><td class="Q">1</td><td><a href="report-544a72.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-544a72.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">add_night_sheet</td><td class="Q">1510</td><td class="Q">1</td><td><a href="report-6c6a3b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6c6a3b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">add_night_sheet</td><td class="Q">1512</td><td class="Q">1</td><td><a href="report-fa7bac.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fa7bac.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">epub_document_add_mathJax</td><td class="Q">1660</td><td class="Q">1</td><td><a href="report-d580b8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d580b8.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>backend/epub/epub-document.c</td><td class="DESC">add_night_sheet</td><td class="Q">1512</td><td class="Q">1</td><td><a href="report-452019.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-452019.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_decode_string</td><td class="Q">4145</td><td class="Q">1</td><td><a href="report-dda5b2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-dda5b2.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_post_process</td><td class="Q">5857</td><td class="Q">1</td><td><a href="report-bac7b3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bac7b3.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_preamble</td><td class="Q">4288</td><td class="Q">1</td><td><a href="report-a7da0e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a7da0e.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_postamble</td><td class="Q">4542</td><td class="Q">1</td><td><a href="report-34df1b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-34df1b.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>shell/ev-daemon.c</td><td class="DESC">document_loaded_cb</td><td class="Q">212</td><td class="Q">3</td><td><a href="report-f3e49e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f3e49e.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>backend/epub/epub-document.c</td><td class="DESC">setup_document_index</td><td class="Q">1272</td><td class="Q">13</td><td><a href="report-383d6e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-383d6e.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>backend/epub/epub-document.c</td><td class="DESC">xml_parse_children_of_node</td><td class="Q">544</td><td class="Q">17</td><td><a href="report-6ae5a0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6ae5a0.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>libview/ev-web-view.c</td><td class="DESC">ev_web_view_change_page</td><td class="Q">173</td><td class="Q">36</td><td><a href="report-c1f46d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c1f46d.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>backend/epub/epub-document.c</td><td class="DESC">xml_parse_children_of_node</td><td class="Q">544</td><td class="Q">17</td><td><a href="report-de4ee3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-de4ee3.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>libview/ev-pixbuf-cache.c</td><td class="DESC">add_job_if_needed</td><td class="Q">711</td><td class="Q">75</td><td><a href="report-154fb5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-154fb5.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_tree_sibling</td><td class="Q">441</td><td class="Q">27</td><td><a href="report-7407e7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7407e7.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>libview/ev-web-view.c</td><td class="DESC">ev_web_view_change_page</td><td class="Q">173</td><td class="Q">36</td><td><a href="report-b24737.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b24737.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_tree_sibling</td><td class="Q">441</td><td class="Q">27</td><td><a href="report-69c951.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-69c951.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>backend/epub/epub-document.c</td><td class="DESC">add_mathjax_script_node_to_file</td><td class="Q">1644</td><td class="Q">22</td><td><a href="report-c275dc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c275dc.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>backend/epub/epub-document.c</td><td class="DESC">add_mathjax_script_node_to_file</td><td class="Q">1644</td><td class="Q">22</td><td><a href="report-641918.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-641918.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>libview/ev-pixbuf-cache.c</td><td class="DESC">add_job_if_needed</td><td class="Q">711</td><td class="Q">75</td><td><a href="report-113c69.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-113c69.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>backend/epub/epub-document.c</td><td class="DESC">setup_document_index</td><td class="Q">1272</td><td class="Q">13</td><td><a href="report-8b8a58.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8b8a58.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_decode_string</td><td class="Q">4155</td><td class="Q">39</td><td><a href="report-b60635.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b60635.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>backend/epub/epub-document.c</td><td class="DESC">get_child_list</td><td class="Q">1192</td><td class="Q">23</td><td><a href="report-e3cb66.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e3cb66.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>cut-n-paste/synctex/synctex_parser_utils.c</td><td class="DESC">_synctex_get_name</td><td class="Q">473</td><td class="Q">18</td><td><a href="report-df47af.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-df47af.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>cut-n-paste/synctex/synctex_parser_utils.c</td><td class="DESC">_synctex_get_name</td><td class="Q">473</td><td class="Q">18</td><td><a href="report-d8a2b9.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d8a2b9.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_decode_string</td><td class="Q">4155</td><td class="Q">39</td><td><a href="report-871e6d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-871e6d.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_preamble</td><td class="Q">4322</td><td class="Q">40</td><td><a href="report-b341b3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b341b3.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>cut-n-paste/synctex/synctex_parser_utils.c</td><td class="DESC">_synctex_get_name</td><td class="Q">473</td><td class="Q">18</td><td><a href="report-403878.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-403878.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>backend/epub/epub-document.c</td><td class="DESC">get_child_list</td><td class="Q">1192</td><td class="Q">23</td><td><a href="report-4cb051.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4cb051.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>cut-n-paste/synctex/synctex_parser_utils.c</td><td class="DESC">_synctex_get_name</td><td class="Q">473</td><td class="Q">18</td><td><a href="report-a81921.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a81921.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_scan_preamble</td><td class="Q">4322</td><td class="Q">40</td><td><a href="report-c4f69a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c4f69a.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>backend/epub/epub-document.c</td><td class="DESC">in_tag</td><td class="Q">144</td><td class="Q">9</td><td><a href="report-2daeba.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2daeba.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>libview/ev-view.c</td><td class="DESC">ev_view_build_height_to_page_cache</td><td class="Q">379</td><td class="Q">57</td><td><a href="report-af2a1f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-af2a1f.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>libview/ev-view.c</td><td class="DESC">ev_view_build_height_to_page_cache</td><td class="Q">379</td><td class="Q">57</td><td><a href="report-f408ce.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f408ce.html" -->
+</tr>
+<tr class="bt_logic_error_out-of-bound_access"><td class="DESC">Logic error</td><td class="DESC">Out-of-bound access</td><td>backend/epub/epub-document.c</td><td class="DESC">in_tag</td><td class="Q">144</td><td class="Q">9</td><td><a href="report-67290d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-67290d.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_open_v2</td><td class="Q">690</td><td class="Q">1</td><td><a href="report-9a19ab.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9a19ab.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">587</td><td class="Q">1</td><td><a href="report-0323b7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0323b7.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">587</td><td class="Q">1</td><td><a href="report-695ee8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-695ee8.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_open_v2</td><td class="Q">699</td><td class="Q">1</td><td><a href="report-851920.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-851920.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_open_v2</td><td class="Q">690</td><td class="Q">1</td><td><a href="report-27b322.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-27b322.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">599</td><td class="Q">1</td><td><a href="report-f71cfe.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f71cfe.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">582</td><td class="Q">1</td><td><a href="report-97f0ac.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-97f0ac.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_open_v2</td><td class="Q">693</td><td class="Q">1</td><td><a href="report-5ae8da.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5ae8da.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">582</td><td class="Q">1</td><td><a href="report-f11a77.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f11a77.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">606</td><td class="Q">1</td><td><a href="report-7573fc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7573fc.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">599</td><td class="Q">1</td><td><a href="report-aee0ed.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-aee0ed.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_open_v2</td><td class="Q">699</td><td class="Q">1</td><td><a href="report-f78d86.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f78d86.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_open_v2</td><td class="Q">693</td><td class="Q">1</td><td><a href="report-a8b069.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a8b069.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcat_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcat'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">606</td><td class="Q">1</td><td><a href="report-6526c0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6526c0.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcpy_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcpy'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">558</td><td class="Q">1</td><td><a href="report-20e28e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-20e28e.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcpy_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcpy'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_open_v2</td><td class="Q">684</td><td class="Q">1</td><td><a href="report-de1b09.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-de1b09.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcpy_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcpy'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">synctex_reader_init_with_output_file</td><td class="Q">738</td><td class="Q">1</td><td><a href="report-796fc5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-796fc5.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcpy_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcpy'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">__synctex_open_v2</td><td class="Q">558</td><td class="Q">1</td><td><a href="report-c29db5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c29db5.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcpy_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcpy'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">_synctex_open_v2</td><td class="Q">684</td><td class="Q">1</td><td><a href="report-4bed8a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4bed8a.html" -->
+</tr>
+<tr class="bt_security_potential_insecure_memory_buffer_bounds_restriction_in_call_strcpy_"><td class="DESC">Security</td><td class="DESC">Potential insecure memory buffer bounds restriction in call 'strcpy'</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">synctex_reader_init_with_output_file</td><td class="Q">738</td><td class="Q">1</td><td><a href="report-bebd57.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bebd57.html" -->
+</tr>
+<tr class="bt_logic_error_potential_unintended_use_of_sizeof_on_pointer_type"><td class="DESC">Logic error</td><td class="DESC">Potential unintended use of sizeof() on pointer type</td><td>backend/epub/epub-document.c</td><td class="DESC">setup_document_content_list</td><td class="Q">1024</td><td class="Q">1</td><td><a href="report-c6258b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c6258b.html" -->
+</tr>
+<tr class="bt_logic_error_potential_unintended_use_of_sizeof_on_pointer_type"><td class="DESC">Logic error</td><td class="DESC">Potential unintended use of sizeof() on pointer type</td><td>backend/epub/epub-document.c</td><td class="DESC">setup_document_content_list</td><td class="Q">1024</td><td class="Q">1</td><td><a href="report-1dbf44.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1dbf44.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>backend/comics/comics-document.c</td><td class="DESC">comics_document_thumbnails_get_dimensions</td><td class="Q">966</td><td class="Q">12</td><td><a href="report-088f08.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-088f08.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>backend/comics/comics-document.c</td><td class="DESC">comics_document_thumbnails_get_dimensions</td><td class="Q">963</td><td class="Q">10</td><td><a href="report-e33314.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e33314.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>backend/tiff/tiff-document.c</td><td class="DESC">tiff_document_thumbnails_get_dimensions</td><td class="Q">484</td><td class="Q">19</td><td><a href="report-c4d77d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c4d77d.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>backend/tiff/tiff-document.c</td><td class="DESC">tiff_document_thumbnails_get_dimensions</td><td class="Q">481</td><td class="Q">17</td><td><a href="report-419099.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-419099.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>backend/comics/comics-document.c</td><td class="DESC">comics_document_thumbnails_get_dimensions</td><td class="Q">963</td><td class="Q">10</td><td><a href="report-483dbc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-483dbc.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>backend/tiff/tiff-document.c</td><td class="DESC">tiff_document_thumbnails_get_dimensions</td><td class="Q">481</td><td class="Q">17</td><td><a href="report-1a340f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1a340f.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>backend/comics/comics-document.c</td><td class="DESC">comics_document_thumbnails_get_dimensions</td><td class="Q">966</td><td class="Q">12</td><td><a href="report-ef092d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ef092d.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>backend/tiff/tiff-document.c</td><td class="DESC">tiff_document_thumbnails_get_dimensions</td><td class="Q">484</td><td class="Q">19</td><td><a href="report-8e51bc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8e51bc.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>backend/pdf/ev-poppler.cc</td><td class="DESC">pdf_document_annotations_add_annotation</td><td class="Q">2953</td><td class="Q">1</td><td><a href="report-e6c710.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e6c710.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>libdocument/ev-attachment.c</td><td class="DESC">ev_attachment_open</td><td class="Q">426</td><td class="Q">1</td><td><a href="report-c5569d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c5569d.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>backend/pdf/ev-poppler.cc</td><td class="DESC">pdf_document_file_exporter_begin</td><td class="Q">1652</td><td class="Q">1</td><td><a href="report-2bc67d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2bc67d.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>shell/main.c</td><td class="DESC">option_version_cb</td><td class="Q">61</td><td class="Q">1</td><td><a href="report-f27282.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f27282.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>backend/epub/minizip/ioapi.c</td><td class="DESC">call_zseek64</td><td class="Q">49</td><td class="Q">1</td><td><a href="report-a47712.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a47712.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>libdocument/ev-attachment.c</td><td class="DESC">ev_attachment_open</td><td class="Q">426</td><td class="Q">1</td><td><a href="report-aa8533.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-aa8533.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>backend/pdf/ev-poppler.cc</td><td class="DESC">pdf_document_file_exporter_begin</td><td class="Q">1652</td><td class="Q">1</td><td><a href="report-455aaf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-455aaf.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>backend/epub/minizip/ioapi.c</td><td class="DESC">call_zseek64</td><td class="Q">49</td><td class="Q">1</td><td><a href="report-dfe3c4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-dfe3c4.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>libview/ev-jobs.c</td><td class="DESC">ev_job_render_run</td><td class="Q">626</td><td class="Q">1</td><td><a href="report-d98e96.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d98e96.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>libview/ev-jobs.c</td><td class="DESC">ev_job_render_run</td><td class="Q">626</td><td class="Q">1</td><td><a href="report-1eb683.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1eb683.html" -->
+</tr>
+<tr class="bt_dead_code_unreachable_code"><td class="DESC">Dead code</td><td class="DESC">Unreachable code</td><td>backend/pdf/ev-poppler.cc</td><td class="DESC">pdf_document_annotations_add_annotation</td><td class="Q">2953</td><td class="Q">1</td><td><a href="report-5ecd47.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5ecd47.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">synctex_display_query</td><td class="Q">7551</td><td class="Q">21</td><td><a href="report-ef48d0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ef48d0.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">synctex_edit_query</td><td class="Q">7559</td><td class="Q">20</td><td><a href="report-5bd0b6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5bd0b6.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">synctex_edit_query</td><td class="Q">7559</td><td class="Q">20</td><td><a href="report-3c62d2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3c62d2.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>cut-n-paste/synctex/synctex_parser.c</td><td class="DESC">synctex_display_query</td><td class="Q">7551</td><td class="Q">21</td><td><a href="report-a682fb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a682fb.html" -->
+</tr>
+</tbody>
+</table>
+
+</body></html>
